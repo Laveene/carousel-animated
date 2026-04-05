@@ -1,34 +1,101 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Carousel</title>
 
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      height: 100%;
       background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    .wrap {
+      height: 100%;
       display: flex;
-      justify-content: center;
       align-items: center;
-      height: 100vh;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    #view {
+      width: 280px;
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #111;
+    }
+
+    #view img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+    }
+
+    button {
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      background: #fff;
+      color: #000;
+      font-weight: 600;
     }
   </style>
 </head>
 
 <body>
+  <div class="wrap">
+    <div id="view">
+      <img id="img" src="" alt="slide" />
+    </div>
 
-<div id="app">TEST</div>
+    <div class="controls">
+      <button onclick="prev()">←</button>
+      <button onclick="next()">→</button>
+    </div>
+  </div>
 
-<script>
-const images = [
-  "https://via.placeholder.com/200",
-  "https://via.placeholder.com/200"
-];
+  <script>
+    // ТЕСТОВЫЕ картинки (чтобы проверить, что всё работает)
+    const images = [
+      "https://picsum.photos/400/400?1",
+      "https://picsum.photos/400/400?2",
+      "https://picsum.photos/400/400?3"
+    ];
 
-console.log(images);
-</script>
+    let i = 0;
+    const img = document.getElementById("img");
 
+    function show() {
+      img.src = images[i];
+    }
+
+    function next() {
+      i = (i + 1) % images.length;
+      show();
+    }
+
+    function prev() {
+      i = (i - 1 + images.length) % images.length;
+      show();
+    }
+
+    show();
+  </script>
 </body>
 </html>
